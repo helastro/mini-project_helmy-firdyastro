@@ -3,18 +3,37 @@ body {
   color: white;
 }
 
-.scroll-container {
-  overflow-x: auto;
+::-webkit-scrollbar {
+  width: 2.5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5px;
 }
 
 .scroll-container::-webkit-scrollbar {
-  width: 5px;
-}
-
-.scroll-container::-webkit-scrollbar-thumb {
-  background-color: transparent;
+  width: 10px;
+  height: 2.5px;
 }
 
 .scroll-container::-webkit-scrollbar-track {
-  background-color: transparent;
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5px;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.75);
 }
