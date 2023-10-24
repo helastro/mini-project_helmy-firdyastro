@@ -16,7 +16,7 @@ function Navbar() {
               <Link to="/Watchlist">WATCHLIST</Link>
             </li>
             <li className="font-normal">
-              <Link to="/">RATE</Link>
+              <Link to="/Rate">RATE</Link>
             </li>
             <li className="font-normal">
               <Link to="/">CHATBOT</Link>

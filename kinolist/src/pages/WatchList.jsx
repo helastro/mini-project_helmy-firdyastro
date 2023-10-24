@@ -49,19 +49,21 @@ function WatchList() {
 
   return (
     <>
-      <Navbar />
-      <div className="scroll container mx-auto">
-        <div>
-          <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-        </div>
-        <div className="flex">
-          <MovieList movies={movies} handleWatchlistClick={addWatchlistMovie} watchlistComponent={AddWatchlist} />
-        </div>
-        <div className="flex items-center mt-4 mb-4">
-          <MovieListHeading heading="WATCHLIST" />
-        </div>{" "}
-        <div className="flex">
-          <MovieList movies={watchlist} handleWatchlistClick={removeWatchlistMovie} watchlistComponent={RemoveWatchlist} />
+      <div className="bg-black h-max text-white">
+        <Navbar />
+        <div className="scroll container mx-auto ">
+          <div>
+            <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+          </div>
+          <div className="flex">
+            <MovieList movies={movies} handleWatchlistClick={addWatchlistMovie} watchlistComponent={AddWatchlist} />
+          </div>
+          <div className="flex items-center mt-4 mb-4">
+            <MovieListHeading heading="WATCHLIST" />
+          </div>{" "}
+          <div className="flex">
+            <MovieList movies={watchlist} handleWatchlistClick={removeWatchlistMovie} watchlistComponent={RemoveWatchlist} />
+          </div>
         </div>
       </div>
     </>
