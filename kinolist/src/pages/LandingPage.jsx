@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 function LandingPage() {
   return (
     <div
-      className="text-white bg-center	bg-cover w-screen h-screen bg-black relative"
+      className="bg-center	bg-cover w-screen h-screen relative"
       style={{
         backgroundImage: `url(${BackgroundLandingPage}),`,
       }}
