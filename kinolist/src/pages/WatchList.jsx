@@ -6,6 +6,7 @@ import MovieListHeading from "../components/MovieListHeading";
 import SearchBar from "../components/SearchBar";
 import AddWatchlist from "../components/AddWatchlist";
 import RemoveWatchlist from "../components/RemoveWatchlist";
+import AddMovieManual from "../components/AddMovieManual";
 
 function WatchList() {
   const [movies, setMovies] = useState([]);
@@ -55,7 +56,7 @@ function WatchList() {
           <div>
             <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
           </div>
-          <div className="flex">
+          <div className="flex items-center mt-4 mb-4">
             <MovieList movies={movies} handleWatchlistClick={addWatchlistMovie} watchlistComponent={AddWatchlist} />
           </div>
           <div className="flex items-center mt-4 mb-4">
@@ -63,6 +64,9 @@ function WatchList() {
           </div>{" "}
           <div className="flex">
             <MovieList movies={watchlist} handleWatchlistClick={removeWatchlistMovie} watchlistComponent={RemoveWatchlist} />
+          </div>
+          <div>
+            <AddMovieManual />
           </div>
         </div>
       </div>
