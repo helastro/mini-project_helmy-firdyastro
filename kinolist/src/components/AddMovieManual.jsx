@@ -24,6 +24,16 @@ function AddMovieManual() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!title || !poster) {
+      alert("Title and URL Poster are required.");
+      return;
+    }
+
+    if (title.length > 30) {
+      alert("Title should not exceed 30 characters");
+      return;
+    }
+
     const movieData = {
       Title: title,
       Poster: poster,
@@ -89,29 +99,29 @@ function AddMovieManual() {
           <div key={movie.id} className="relative me-4 mb-4 flex flex-col items-center justify-center shrink-0">
             <div className="image-container hover:scale-105 hover:cursor-pointer transition duration-250 ease-in">
               <img src={movie.Poster} alt={movie.Title} className="rounded w-75 h-110 transition" />
-              <div onClick={() => handleDelete(movie.id)} className="overlay flex items-center justify-center inset-0 w-75 h-110  opacity-0 text-xl p-5 text-center absolute">
+              <div onClick={() => handleDelete(movie.id)} className="overlay bg-white/75 flex items-center justify-center inset-0 w-75 h-110  opacity-0 text-xl p-5 text-center absolute">
                 <RemoveWatchlist />
               </div>
             </div>
-            <p className="text-center my-4">{movie.Title}</p>
+            <p className="text-center my-4 font-bold w-75">{movie.Title}</p>
             <Button label="Edit" onClick={() => handleEdit(movie.id)} />
           </div>
         ))}
       </div>
 
       <div className="flex items-center mt-4 mb-4">
-        <MovieListHeading heading={isEditing ? "Edit Movie" : "Add Manually"} />
+        <MovieListHeading heading={isEditing ? "Edit" : "Add Manually"} />
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
-          <label htmlFor="title" className="text-gray-600">
+          <label htmlFor="title" className="text-black">
             Title:
           </label>
           <input type="text" id="title" value={title} onChange={handleTitleChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="poster" className="text-gray-600">
+          <label htmlFor="poster" className="text-black">
             URL Poster:
           </label>
           <input type="text" id="poster" value={poster} onChange={handlePosterChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />

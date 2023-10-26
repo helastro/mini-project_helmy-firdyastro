@@ -27,7 +27,3 @@
 .image-container:hover .overlay {
   opacity: 1;
 }
-
-.overlay {
-  background: rgba(255, 255, 255, 0.75);
-}
