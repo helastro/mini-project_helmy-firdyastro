@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieListHeading from "../components/MovieListHeading";
 import Button from "./Button";
-import RemoveRate from "./RemoveRate";
+import RemoveRate from "./RemoveRate"; // Import RemoveRate
 
 function MovieListRate() {
   const [title, setTitle] = useState("");
   const [poster, setPoster] = useState("");
   const [rating, setRating] = useState("");
+  const [description, setDescription] = useState("");
   const [movieList, setMovieList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isPopupActive, setIsPopupActive] = useState(false);
   const URL_API = "https://653a1600e3b530c8d9e92290.mockapi.io/kinolist/rate";
 
   const handleTitleChange = (e) => {
@@ -25,11 +28,15 @@ function MovieListRate() {
     setRating(e.target.value);
   };
 
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !poster || !rating) {
-      alert("Title, URL Poster, and Rating are required.");
+    if (!title || !poster || !rating || !description) {
+      alert("Title, URL Poster, Rating, and Description are required.");
       return;
     }
 
@@ -47,6 +54,7 @@ function MovieListRate() {
       Title: title,
       Poster: poster,
       Rating: rating,
+      Description: description,
     };
 
     if (isEditing) {
@@ -70,6 +78,7 @@ function MovieListRate() {
     setTitle("");
     setPoster("");
     setRating("");
+    setDescription("");
     getMovieList();
   };
 
@@ -78,6 +87,7 @@ function MovieListRate() {
     setTitle(movieToEdit.Title);
     setPoster(movieToEdit.Poster);
     setRating(movieToEdit.Rating);
+    setDescription(movieToEdit.Description);
     setIsEditing(true);
     setEditId(id);
   };
@@ -104,6 +114,24 @@ function MovieListRate() {
     }
   };
 
+  const handleRatingClick = async (id) => {
+    try {
+      const response = await axios.get(`${URL_API}/${id}`);
+      setSelectedMovie(response.data);
+      setIsPopupActive(true);
+
+      document.body.style.overflow = "hidden";
+    } catch (error) {
+      console.error("Error fetching movie data:", error);
+    }
+  };
+
+  const closePopup = () => {
+    setIsPopupActive(false);
+
+    document.body.style.overflow = "auto";
+  };
+
   return (
     <div>
       <div className="scroll-container overflow-y-hidden overflow-x-auto flex flex-nowrap">
@@ -115,7 +143,7 @@ function MovieListRate() {
                 <RemoveRate />
               </div>
             </div>
-            <div>
+            <div onClick={() => handleRatingClick(movie.id)} className="hover:cursor-pointer">
               <div className="rounded-full bg-black p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
                 <p className="text-white text-lg">{movie.Rating}</p>
               </div>
@@ -149,8 +177,42 @@ function MovieListRate() {
           </label>
           <input type="text" id="rating" value={rating} onChange={handleRatingChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />
         </div>
+        <div className="flex flex-col">
+          <label htmlFor="description" className="text-black">
+            Your thought:
+          </label>
+          <textarea id="description" value={description} onChange={handleDescriptionChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />
+        </div>
+
         <Button type="submit" label={isEditing ? "Update" : "Add"} />
       </form>
+
+      {isPopupActive && selectedMovie && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg w-1/2">
+            <div className="flex">
+              <div>
+                <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="rounded w-75 h-110" />
+              </div>
+              <div className="ml-4">
+                <h2 className="text-5xl italic font-bold">{selectedMovie.Title}</h2>
+                <div className="my-4">
+                  <div className="rounded-full bg-black p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
+                    <p className="text-white text-lg">{selectedMovie.Rating}</p>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs">My thought:</p>
+                  <p className="mt-2">{selectedMovie.Description}</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center items-center mt-4">
+              <Button onClick={closePopup} label="Close" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
