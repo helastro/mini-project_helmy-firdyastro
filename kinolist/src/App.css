@@ -1,13 +1,18 @@
+body {
+  background: #000;
+  color: #fff;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: black;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #000;
+  background: #fff;
   border-radius: 5px;
 }
 
@@ -16,14 +21,22 @@
 }
 
 .scroll-container::-webkit-scrollbar-track {
-  background: transparent;
+  background: black;
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
-  background: #000;
+  background: #fff;
   border-radius: 5px;
 }
 
 .image-container:hover .overlay {
   opacity: 1;
+}
+
+.message-input {
+  background: black !important;
+}
+
+.cs-chat-container .cs-message-input {
+  border: none !important;
 }

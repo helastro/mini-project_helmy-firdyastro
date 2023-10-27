@@ -50,7 +50,7 @@ function WatchList() {
 
   return (
     <>
-      <div>
+      <div className="bg-black text-white">
         <Navbar />
         <div className="scroll container mx-auto ">
           <div>

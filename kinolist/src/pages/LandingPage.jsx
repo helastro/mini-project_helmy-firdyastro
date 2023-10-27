@@ -10,8 +10,15 @@ function LandingPage() {
         backgroundImage: `url(${BackgroundLandingPage}),`,
       }}
     >
-      {/* <div className="absolute inset-0 bg-black opacity-90"></div> */}
       <Navbar />
+      <div className="absolute bg-gradient-to-r from-black inset-0 flex flex-col items-center justify-center">
+        <div className="container mx-auto">
+          <h1 style={{ fontFamily: "Courier New" }} className="text-9xl">
+            KINOLIST
+          </h1>
+          <p className="text-xl">Organize, Rate, Get Recommendations.</p>
+        </div>
+      </div>
     </div>
   );
 }

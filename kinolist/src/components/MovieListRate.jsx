@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieListHeading from "../components/MovieListHeading";
 import Button from "./Button";
-import RemoveRate from "./RemoveRate"; // Import RemoveRate
+import RemoveRate from "./RemoveRate";
 
 function MovieListRate() {
   const [title, setTitle] = useState("");
@@ -139,13 +139,13 @@ function MovieListRate() {
           <div key={movie.id} className="relative me-4 mb-4 flex flex-col items-center justify-center shrink-0">
             <div className="image-container hover:scale-105 hover:cursor-pointer transition duration-250 ease-in">
               <img src={movie.Poster} alt={movie.Title} className="rounded w-75 h-110 transition" />
-              <div onClick={() => handleDelete(movie.id)} className="overlay bg-white/[0.75] flex items-center justify-center inset-0 w-75 h-110  opacity-0 text-xl p-5 text-center absolute">
+              <div onClick={() => handleDelete(movie.id)} className="overlay bg-black/75 flex items-center justify-center inset-0 w-75 h-110  opacity-0 text-xl p-5 text-center absolute">
                 <RemoveRate />
               </div>
             </div>
             <div onClick={() => handleRatingClick(movie.id)} className="hover:cursor-pointer">
-              <div className="rounded-full bg-black p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
-                <p className="text-white text-lg">{movie.Rating}</p>
+              <div className="rounded-full bg-black border border-white p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
+                <p className="text-white text-lg font-medium">{movie.Rating}</p>
               </div>
             </div>
             <p className="text-center mb-2 font-bold w-75">{movie.Title}</p>
@@ -155,49 +155,49 @@ function MovieListRate() {
       </div>
 
       <div className="flex items-center mt-4 mb-4">
-        <MovieListHeading heading={isEditing ? "Edit" : "Add Manually"} />
+        <MovieListHeading heading={isEditing ? "Edit" : "Add"} />
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
-          <label htmlFor="title" className="text-black">
+          <label htmlFor="title" className="text-white">
             Title:
           </label>
-          <input type="text" id="title" value={title} onChange={handleTitleChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />
+          <input type="text" id="title" value={title} onChange={handleTitleChange} className="w-1/3 border border-white bg-black rounded px-3 py-2 focus:outline-none" />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="poster" className="text-black">
+          <label htmlFor="poster" className="text-white">
             URL Poster:
           </label>
-          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />
+          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className="w-1/3 border border-white bg-black rounded px-3 py-2 focus:outline-none" />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="rating" className="text-black">
+          <label htmlFor="rating" className="text-white">
             Rating:
           </label>
-          <input type="text" id="rating" value={rating} onChange={handleRatingChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />
+          <input type="text" id="rating" value={rating} onChange={handleRatingChange} className="w-1/3 border border-white bg-black rounded px-3 py-2 focus:outline-none" />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="description" className="text-black">
+          <label htmlFor="description" className="text-white">
             Your thought:
           </label>
-          <textarea id="description" value={description} onChange={handleDescriptionChange} className="w-1/3 border border-black rounded px-3 py-2 focus:outline-none" />
+          <textarea id="description" value={description} onChange={handleDescriptionChange} className="w-1/3 border border-white bg-transparent rounded px-3 py-2 focus:outline-none" />
         </div>
 
         <Button type="submit" label={isEditing ? "Update" : "Add"} />
       </form>
 
       {isPopupActive && selectedMovie && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg w-1/2">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/75">
+          <div className="bg-black p-4 rounded-lg w-1/2 p-4 shadow shadow-white/50">
             <div className="flex">
-              <div>
+              <div className="shrink-0">
                 <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="rounded w-75 h-110" />
               </div>
-              <div className="ml-4">
+              <div className="ml-4 overflow-hidden">
                 <h2 className="text-5xl italic font-bold">{selectedMovie.Title}</h2>
                 <div className="my-4">
-                  <div className="rounded-full bg-black p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
+                  <div className="rounded-full bg-black border brder-white p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
                     <p className="text-white text-lg">{selectedMovie.Rating}</p>
                   </div>
                 </div>
