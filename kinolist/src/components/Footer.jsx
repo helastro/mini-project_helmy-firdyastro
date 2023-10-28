@@ -1,8 +1,10 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../LanguageContext";
 
 function Footer() {
+  const { isEnglish } = useLanguage();
   return (
     <footer className="bg-black h-auto w-full">
       <div className="container mx-auto p-5 flex flex-col md:flex-row justify-around items-start">
@@ -29,9 +31,9 @@ function Footer() {
         </div>
         <div className="p-5">
           <ul>
-            <p className="text-white font-bold text-2xl pb-4">Page</p>
+            <p className="text-white font-bold text-2xl pb-4">{isEnglish ? "Page" : "Halaman"}</p>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer">
-              <Link to="/">Home</Link>
+              <Link to="/">{isEnglish ? "Home" : "Beranda"}</Link>
             </li>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer">
               <Link to="/Watchlist">Watchlist</Link>
@@ -43,13 +45,13 @@ function Footer() {
               <Link to="/Chatbot">Chatbot</Link>
             </li>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer">
-              <Link to="/How-to-Use">How to Use</Link>
+              <Link to="/How-to-Use">{isEnglish ? "How to Use" : "Cara Penggunaan"}</Link>
             </li>
           </ul>
         </div>
         <div className="p-5">
           <ul>
-            <p className="text-white font-bold text-2xl pb-4">Social</p>
+            <p className="text-white font-bold text-2xl pb-4">{isEnglish ? "Social" : "Sosial"}</p>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer">
               <a href="https://www.facebook.com/profile.php?id=100010732577121" className="text-white" target="_blank">
                 Facebook
@@ -74,7 +76,7 @@ function Footer() {
         </div>
         <div className="p-5">
           <ul>
-            <p className="text-white font-bold text-2xl pb-4">Contact</p>
+            <p className="text-white font-bold text-2xl pb-4">{isEnglish ? "Contact" : "Kontak"}</p>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer">Helmy Firdyastro</li>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer">Kab. Cirebon</li>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer">helmyfirdy888@gmail.com</li>
@@ -84,7 +86,8 @@ function Footer() {
       </div>
       <div className="bg-black flex flex-col justify-center items-center text-center p-5">
         <p className="text-white">
-          This website is made by <span className="cursor-pointer hover:text-violet-700 text-violet-500 font-bold">HELASTRO</span>
+          {isEnglish ? "This website is made by " : "Website ini dibuat oleh "}
+          <span className="cursor-pointer hover:text-violet-700 text-violet-500 font-bold">HELASTRO</span>
         </p>
       </div>
     </footer>

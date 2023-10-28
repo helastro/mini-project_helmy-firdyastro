@@ -3,6 +3,7 @@ import axios from "axios";
 import MovieListHeading from "../components/MovieListHeading";
 import Button from "./Button";
 import RemoveRate from "./RemoveRate";
+import { useLanguage } from "../LanguageContext";
 
 function MovieListRate() {
   const [title, setTitle] = useState("");
@@ -14,6 +15,7 @@ function MovieListRate() {
   const [editId, setEditId] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isPopupActive, setIsPopupActive] = useState(false);
+  const { isEnglish } = useLanguage();
   const URL_API = "https://653a1600e3b530c8d9e92290.mockapi.io/kinolist/rate";
 
   const handleTitleChange = (e) => {
@@ -36,17 +38,17 @@ function MovieListRate() {
     e.preventDefault();
 
     if (!title || !poster || !rating || !description) {
-      alert("Title, URL Poster, Rating, and Description are required.");
+      alert(isEnglish ? "Title, URL Poster, Rating, and Your Thought are required." : "Judul, URL Poster, Rating, dan Pikiranmu harus diisi");
       return;
     }
 
     if (title.length > 30) {
-      alert("Title should not exceed 30 characters");
+      alert(isEnglish ? "Title should not exceed 30 characters" : "Judul tidak boleh melebihi 30 karakter.");
       return;
     }
 
     if (rating < 1 || rating > 10) {
-      alert("Rating must be between 1 and 10");
+      alert(isEnglis ? "Rating must be between 1-10" : "Rating harus diantara 1-10");
       return;
     }
 
@@ -149,19 +151,19 @@ function MovieListRate() {
               </div>
             </div>
             <p className="text-center mb-2 font-bold w-75">{movie.Title}</p>
-            <Button label="Edit" onClick={() => handleEdit(movie.id)} />
+            <Button label={isEnglish ? "Edit" : "Sunting"} onClick={() => handleEdit(movie.id)} />
           </div>
         ))}
       </div>
 
       <div className="flex items-center mt-4 mb-4">
-        <MovieListHeading heading={isEditing ? "Edit" : "Add"} />
+        <MovieListHeading heading={isEditing ? (isEnglish ? "Edit" : "Sunting") : isEnglish ? "Add" : "Tambah"} />
       </div>
 
       <form className="space-y-4 mb-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label htmlFor="title" className="text-white">
-            Title:
+            {isEnglish ? "Title:" : "Judul:"}
           </label>
           <input type="text" id="title" value={title} onChange={handleTitleChange} className="w-1/3 border border-white bg-black rounded px-3 py-2 focus:outline-none" />
         </div>
@@ -179,11 +181,11 @@ function MovieListRate() {
         </div>
         <div className="flex flex-col">
           <label htmlFor="description" className="text-white">
-            Your thought:
+            {isEnglish ? "Your Thought:" : "Pikiranmu:"}
           </label>
           <textarea id="description" value={description} onChange={handleDescriptionChange} className="w-1/3 border border-white bg-transparent rounded px-3 py-2 focus:outline-none" />
         </div>
-        <Button type="submit" label={isEditing ? "Update" : "Add"} />
+        <Button type="submit" label={isEditing ? (isEnglish ? "Update" : "Perbarui") : isEnglish ? "Add" : "Tambah"} />
       </form>
 
       {isPopupActive && selectedMovie && (
@@ -194,14 +196,14 @@ function MovieListRate() {
                 <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="rounded w-75 h-110" />
               </div>
               <div className="ml-4 overflow-hidden">
-                <h2 className="text-5xl italic font-bold">{selectedMovie.Title}</h2>
+                <h2 className="text-3xl italic font-bold">{selectedMovie.Title}</h2>
                 <div className="my-4">
                   <div className="rounded-full bg-black border brder-white p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
                     <p className="text-white text-lg">{selectedMovie.Rating}</p>
                   </div>
                 </div>
                 <div>
-                  <p className="text-xs">My thought:</p>
+                  <p className="text-xs">{isEnglish ? "My Thought:" : "Pikiranku:"}</p>
                   <p className="mt-2">{selectedMovie.Description}</p>
                 </div>
               </div>

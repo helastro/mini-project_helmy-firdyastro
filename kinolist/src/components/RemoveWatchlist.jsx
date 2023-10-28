@@ -1,9 +1,12 @@
 import React from "react";
+import { useLanguage } from "../LanguageContext";
 
 function RemoveWatchlist() {
+  const { isEnglish } = useLanguage();
+
   return (
     <>
-      <span>Remove from Watchlist</span>
+      <span>{isEnglish ? "Remove from Watchlist" : "Hapus dari Watchlist"}</span>
     </>
   );
 }

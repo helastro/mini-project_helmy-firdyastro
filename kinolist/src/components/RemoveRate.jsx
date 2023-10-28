@@ -1,9 +1,12 @@
 import React from "react";
+import { useLanguage } from "../LanguageContext";
 
 function RemoveRate() {
+  const { isEnglish } = useLanguage();
+
   return (
     <>
-      <span>Remove from Rate</span>
+      <span>{isEnglish ? "Remove from Rate" : "Hapus dari Rate"}</span>
     </>
   );
 }

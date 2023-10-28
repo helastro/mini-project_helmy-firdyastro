@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import BackgroundLandingPage from "../assets/img/background_LandingPage.jpg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Typewriter from "typewriter-effect";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../LanguageContext";
 
 function LandingPage() {
+  const { isEnglish } = useLanguage();
+
   const typeEffect = (typewriter, text) => {
     typewriter.typeString(text).pauseFor(3000).deleteAll(100).pauseFor(1500).start();
   };
@@ -30,9 +33,9 @@ function LandingPage() {
                 }}
               />
             </h1>
-            <p className="text-xl mb-6">Organize, Rate, Get Recommendations.</p>
+            <p className="text-xl mb-6">{isEnglish ? "Organize, Rate, Get Recommendations." : "Atur, Nilai, Dapatkan Rekomendasi."}</p>
             <Link to="/How-to-Use">
-              <Button label="Learn More" />
+              <Button label={isEnglish ? "Learn More" : "Pelajari Lebih Lanjut"} />
             </Link>
           </div>
         </div>

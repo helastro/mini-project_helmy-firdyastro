@@ -4,8 +4,10 @@ import MovieListHeading from "../components/MovieListHeading";
 import Button from "./Button";
 import "../App.css";
 import RemoveWatchlist from "./RemoveWatchlist";
+import { useLanguage } from "../LanguageContext";
 
 function AddMovieManual() {
+  const { isEnglish } = useLanguage();
   const [title, setTitle] = useState("");
   const [poster, setPoster] = useState("");
   const [movieList, setMovieList] = useState([]);
@@ -25,12 +27,12 @@ function AddMovieManual() {
     e.preventDefault();
 
     if (!title || !poster) {
-      alert("Title and URL Poster are required.");
+      alert(isEnglish ? "Title and URL Poster are required." : "Judul dan URL Poster harus diisi.");
       return;
     }
 
     if (title.length > 30) {
-      alert("Title should not exceed 30 characters");
+      alert(isEnglish ? "Title should not exceed 30 characters" : "Judul tidak boleh melebihi 30 karakter.");
       return;
     }
 
@@ -104,19 +106,19 @@ function AddMovieManual() {
               </div>
             </div>
             <p className="text-center my-4 font-bold w-75">{movie.Title}</p>
-            <Button label="Edit" onClick={() => handleEdit(movie.id)} />
+            <Button label={isEnglish ? "Edit" : "Sunting"} onClick={() => handleEdit(movie.id)} />
           </div>
         ))}
       </div>
 
       <div className="flex items-center mt-4 mb-4">
-        <MovieListHeading heading={isEditing ? "Edit" : "Add Manually"} />
+        <MovieListHeading heading={isEditing ? (isEnglish ? "Edit" : "Sunting") : isEnglish ? "Add Manually" : "Tambah Manual"} />
       </div>
 
       <form className="space-y-4 mb-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label htmlFor="title" className="text-white">
-            Title:
+            {isEnglish ? "Title:" : "Judul:"}
           </label>
           <input type="text" id="title" value={title} onChange={handleTitleChange} className="w-1/3 bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none" />
         </div>
@@ -126,7 +128,7 @@ function AddMovieManual() {
           </label>
           <input type="text" id="poster" value={poster} onChange={handlePosterChange} className="w-1/3 bg-transparent border border-white rounded px-3 py-2 focus:outline-none" />
         </div>
-        <Button type="submit" label={isEditing ? "Update" : "Add"} />
+        <Button type="submit" label={isEditing ? (isEnglish ? "Update" : "Perbarui") : isEnglish ? "Add" : "Tambah"} />
       </form>
     </div>
   );

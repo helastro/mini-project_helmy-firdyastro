@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
+import Button from "../components/Button";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { useLanguage } from "../LanguageContext";
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 
-const API_KEY = "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";
+const API_KEY = import.meta.env.VITE_OPENAI_KEY;
 
 const systemMessage = {
   role: "system",
@@ -12,13 +14,20 @@ const systemMessage = {
 };
 
 function Chatbot() {
-  const [messages, setMessages] = useState([
-    {
-      message: "Hello, ask me anything about the world of cinema.",
-      sentTime: "just now",
-      sender: "ChatGPT",
-    },
-  ]);
+  const { isEnglish } = useLanguage();
+
+  const [messages, setMessages] = useState(() => {
+    const savedMessages = localStorage.getItem("chatMessages");
+    return savedMessages
+      ? JSON.parse(savedMessages)
+      : [
+          {
+            message: "Hello, ask me anything about the world of cinema.",
+            sentTime: "just now",
+            sender: "ChatGPT",
+          },
+        ];
+  });
   const [isTyping, setIsTyping] = useState(false);
 
   const handleSend = async (message) => {
@@ -76,19 +85,34 @@ function Chatbot() {
       });
   }
 
+  const handleReset = () => {
+    localStorage.removeItem("chatMessages");
+    setMessages([]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("chatMessages", JSON.stringify(messages));
+  }, [messages]);
+
   return (
     <div className="chatbot bg-black text-white">
       <Navbar />
+      <div className="flex justify-center items-center sticky top-16 z-10">
+        <Button onClick={handleReset} label={isEnglish ? "Reset" : "Atur Ulang"} />
+      </div>
       <div className="relative h-full w-full bg-black">
         <MainContainer className="border-none mx-40">
           <ChatContainer>
-            <MessageList className=" scroll-smooth bg-black text-white" typingIndicator={isTyping ? <TypingIndicator className="bg-black rounded-full w-1/5 bg-black text-black" content="Hold on, let me cook..." /> : null}>
+            <MessageList
+              className=" scroll-smooth bg-black text-white bottom-12"
+              typingIndicator={isTyping ? <TypingIndicator className="bg-black rounded-full w-1/5 bg-black text-black" content={isEnglish ? "Hold on, let me cook..." : "Tunggu, biarkan aku berpikir..."} /> : null}
+            >
               {messages.map((message, i) => {
                 console.log(message);
                 return <Message className="messageBubble" key={i} model={message} />;
               })}
             </MessageList>
-            <MessageInput className="message-input fixed bottom-0 border-none w-10/12" placeholder="Type..." onSend={handleSend} />
+            <MessageInput className="message-input fixed bottom-0 border-none w-10/12" placeholder={isEnglish ? "Type..." : "Ketik..."} onSend={handleSend} />
           </ChatContainer>
         </MainContainer>
       </div>
