@@ -113,7 +113,7 @@ function AddMovieManual() {
         <MovieListHeading heading={isEditing ? "Edit" : "Add Manually"} />
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4 mb-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label htmlFor="title" className="text-white">
             Title:

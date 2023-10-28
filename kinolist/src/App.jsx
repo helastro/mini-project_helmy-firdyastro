@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import WatchList from "./pages/WatchList";
 import Rate from "./pages/Rate";
 import Chatbot from "./pages/Chatbot";
+import HowtoUse from "./pages/HowtoUse";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Watchlist" element={<WatchList />} />
         <Route path="/Rate" element={<Rate />} />
         <Route path="/Chatbot" element={<Chatbot />} />
+        <Route path="/How-to-Use" element={<HowtoUse />} />
       </Routes>
     </BrowserRouter>
   );

@@ -158,7 +158,7 @@ function MovieListRate() {
         <MovieListHeading heading={isEditing ? "Edit" : "Add"} />
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4 mb-4" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label htmlFor="title" className="text-white">
             Title:
@@ -183,7 +183,6 @@ function MovieListRate() {
           </label>
           <textarea id="description" value={description} onChange={handleDescriptionChange} className="w-1/3 border border-white bg-transparent rounded px-3 py-2 focus:outline-none" />
         </div>
-
         <Button type="submit" label={isEditing ? "Update" : "Add"} />
       </form>
 

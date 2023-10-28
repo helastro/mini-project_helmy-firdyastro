@@ -4,11 +4,11 @@ import Navbar from "../components/Navbar";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const systemMessage = {
   role: "system",
-  content: "You are Marv, a chatbot that reluctantly answers cinema questions with sarcastic responses.",
+  content: "You are Marv, a chatbot that reluctantly answers movies and tv shows questions with sarcastic responses, and will divert talk to movies and tv shows when asked about something else.",
 };
 
 function Chatbot() {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import MovieListRate from "../components/MovieListRate";
 import MovieListHeading from "../components/MovieListHeading";
 
@@ -17,6 +18,7 @@ function Rate() {
             <MovieListRate />
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

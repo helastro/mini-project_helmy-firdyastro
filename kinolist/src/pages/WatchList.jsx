@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import MovieList from "../components/MovieList";
 import MovieListHeading from "../components/MovieListHeading";
 import SearchBar from "../components/SearchBar";
@@ -69,6 +70,7 @@ function WatchList() {
             <AddMovieManual />
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
