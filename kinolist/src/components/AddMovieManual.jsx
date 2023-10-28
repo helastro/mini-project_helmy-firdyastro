@@ -13,7 +13,7 @@ function AddMovieManual() {
   const [movieList, setMovieList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
-  const URL_API = "https://6538bec1a543859d1bb1d5d3.mockapi.io/kinolist/MovieListManual";
+  const URL_API = import.meta.env.VITE_WATCHLIST_KEY;
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);

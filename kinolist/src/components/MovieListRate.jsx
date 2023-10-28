@@ -16,7 +16,7 @@ function MovieListRate() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isPopupActive, setIsPopupActive] = useState(false);
   const { isEnglish } = useLanguage();
-  const URL_API = "https://653a1600e3b530c8d9e92290.mockapi.io/kinolist/rate";
+  const URL_API = import.meta.env.VITE_RATE_KEY;
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);

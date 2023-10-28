@@ -9,13 +9,15 @@ import AddWatchlist from "../components/AddWatchlist";
 import RemoveWatchlist from "../components/RemoveWatchlist";
 import AddMovieManual from "../components/AddMovieManual";
 
+const API_KEY = import.meta.env.VITE_OMDB_KEY;
+
 function WatchList() {
   const [movies, setMovies] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   const getMovieRequest = async (searchValue) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=d38ed0a8`;
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
     const response = await fetch(url);
     const responseJson = await response.json();
 
