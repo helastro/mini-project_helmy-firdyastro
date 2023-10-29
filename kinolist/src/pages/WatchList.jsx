@@ -8,6 +8,7 @@ import SearchBar from "../components/SearchBar";
 import AddWatchlist from "../components/AddWatchlist";
 import RemoveWatchlist from "../components/RemoveWatchlist";
 import AddMovieManual from "../components/AddMovieManual";
+import MediaQuery from "../MediaQuery";
 
 const API_KEY = import.meta.env.VITE_OMDB_KEY;
 
@@ -15,6 +16,7 @@ function WatchList() {
   const [movies, setMovies] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const isMobile = MediaQuery("(max-width: 768px)");
 
   const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
@@ -55,20 +57,20 @@ function WatchList() {
     <>
       <div className="bg-black text-white">
         <Navbar />
-        <div className="scroll container mx-auto ">
+        <div className="scroll container mx-auto">
           <div>
             <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
           </div>
-          <div className="flex items-center mt-4 mb-4">
+          <div className={`flex items-center ${isMobile ? "mx-8" : ""}`}>
             <MovieList movies={movies} handleWatchlistClick={addWatchlistMovie} watchlistComponent={AddWatchlist} />
           </div>
-          <div className="flex items-center mt-4 mb-4">
+          <div className={`flex items-center ${isMobile ? " justify-center" : ""}`}>
             <MovieListHeading heading="WATCHLIST" />
           </div>{" "}
-          <div className="flex">
+          <div className={`flex items-center my-4 ${isMobile ? "mx-8" : ""}`}>
             <MovieList movies={watchlist} handleWatchlistClick={removeWatchlistMovie} watchlistComponent={RemoveWatchlist} />
           </div>
-          <div>
+          <div className={`flex items-center my-4 ${isMobile ? "mx-8" : ""}`}>
             <AddMovieManual />
           </div>
         </div>
