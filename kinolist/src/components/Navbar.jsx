@@ -4,37 +4,45 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../LanguageContext";
 import FlagEng from "../assets/img/flag_Eng.png";
 import FlagInd from "../assets/img/flag_Ind.png";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 function Navbar({ className }) {
   const { isEnglish, toggleLanguage } = useLanguage();
+  let [open, setOpen] = useState(false);
+
+  const Links = [
+    { name: isEnglish ? "HOME" : "BERANDA", link: "/" },
+    { name: "WATCHLIST", link: "/Watchlist" },
+    { name: "RATE", link: "/Rate" },
+    { name: "CHATBOT", link: "/Chatbot" },
+    { name: isEnglish ? "HOW TO USE" : "CARA PENGGUNAAN", link: "/How-to-Use" },
+  ];
+
   return (
     <>
-      <nav className="bg-gradient-to-b from-black text-white p-4 flex justify-between items-center sticky top-0 z-50 relative">
-        <Link to="/">
-          <img src={Logo} alt="Logo" className="h-8 w-8" />
-        </Link>
-        <div>
-          <ul className="flex gap-x-12 justify-center items-center">
-            <li className="font-normal">
-              <Link to="/">{isEnglish ? "HOME" : "BERANDA"}</Link>
-            </li>
-            <li className="font-normal">
-              <Link to="/Watchlist">WATCHLIST</Link>
-            </li>
-            <li className="font-normal">
-              <Link to="/Rate">RATE</Link>
-            </li>
-            <li className="font-normal">
-              <Link to="/Chatbot">CHATBOT</Link>
-            </li>
-            <li className="font-normal">
-              <Link to="/How-to-Use">{isEnglish ? "HOW TO USE" : "CARA PENGGUNAAN"}</Link>
-            </li>
+      <nav className="bg-gradient-to-b from-black text-white z-50 relative p-4 w-full sticky top-0 left-0 ">
+        <div className="flex items-center justify-between">
+          <Link to="/">
+            <img src={Logo} alt="Logo" className="h-8 w-8 cursor-pointer" />
+          </Link>
+          <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-12 bg-gradient-to-t from-black" : "top-[-490px] "}`}>
+            {Links.map((link, index) => (
+              <li key={index} className="md:ml-8 md:my-0 my-7 font-semibold">
+                <a href={link.link} className={`text-white hover:font-bold duration-500 ${open ? "bg-black py-2 px-4 rounded-full" : ""}`}>
+                  {link.name}
+                </a>
+              </li>
+            ))}
           </ul>
+          <div className="flex items-center gap-6">
+            <button className="h-8 w-8" onClick={toggleLanguage}>
+              {isEnglish ? <img src={FlagEng} alt="English Flag" /> : <img src={FlagInd} alt="Indonesian Flag" />}
+            </button>
+            <div onClick={() => setOpen(!open)} className="  cursor-pointer md:hidden">
+              {open ? <AiOutlineClose className="h-8 w-8" /> : <AiOutlineMenu className="h-8 w-8" />}
+            </div>
+          </div>
         </div>
-        <button className="h-8 w-8" onClick={toggleLanguage}>
-          {isEnglish ? <img src={FlagEng} alt="English Flag" /> : <img src={FlagInd} alt="Indonesian Flag" />}
-        </button>
       </nav>
       <div className={`inset-0 flex flex-col items-center justify-center h-screen absolute z-0 pointer-events-none ${className}`}></div>
     </>
