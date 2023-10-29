@@ -4,6 +4,7 @@ import MovieListHeading from "../components/MovieListHeading";
 import Button from "./Button";
 import RemoveRate from "./RemoveRate";
 import { useLanguage } from "../LanguageContext";
+import MediaQuery from "../MediaQuery";
 
 function MovieListRate() {
   const [title, setTitle] = useState("");
@@ -16,6 +17,7 @@ function MovieListRate() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isPopupActive, setIsPopupActive] = useState(false);
   const { isEnglish } = useLanguage();
+  const isMobile = MediaQuery("(max-width: 768px)");
   const URL_API = import.meta.env.VITE_RATE_KEY;
 
   const handleTitleChange = (e) => {
@@ -140,17 +142,17 @@ function MovieListRate() {
         {movieList.map((movie) => (
           <div key={movie.id} className="relative me-4 mb-4 flex flex-col items-center justify-center shrink-0">
             <div className="image-container hover:scale-105 hover:cursor-pointer transition duration-250 ease-in">
-              <img src={movie.Poster} alt={movie.Title} className="rounded w-75 h-110 transition" />
-              <div onClick={() => handleDelete(movie.id)} className="overlay bg-black/75 flex items-center justify-center inset-0 w-75 h-110  opacity-0 text-xl p-5 text-center absolute">
+              <img src={movie.Poster} alt={movie.Title} className={`rounded transition ${isMobile ? "w-48 h-72" : "w-75 h-110"}`} />
+              <div onClick={() => handleDelete(movie.id)} className={`opacity-0 overlay bg-black/75 flex items-center justify-center inset-0 p-5 text-center absolute ${isMobile ? "w-48 h-72 text-md" : "w-75 h-110 text-xl"}`}>
                 <RemoveRate />
               </div>
             </div>
-            <div onClick={() => handleRatingClick(movie.id)} className="hover:cursor-pointer">
-              <div className="rounded-full bg-black border border-white p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
-                <p className="text-white text-lg font-medium">{movie.Rating}</p>
+            <div onClick={() => handleRatingClick(movie.id)} className="hover:cursor-pointer ">
+              <div className={`rounded-full bg-black border border-white p-4 -top-4 -right-4 flex items-center justify-center my-2 ${isMobile ? "w-8 h-8" : "w-10 h-10"}`}>
+                <p className={`text-white font-medium ${isMobile ? "text-sm" : "text-lg"}`}>{movie.Rating}</p>
               </div>
             </div>
-            <p className="text-center mb-2 font-bold w-75">{movie.Title}</p>
+            <p className={`text-center font-bold mb-4 ${isMobile ? "w-48 text-sm truncate" : "w-75"}`}>{movie.Title}</p>
             <Button label={isEnglish ? "Edit" : "Sunting"} onClick={() => handleEdit(movie.id)} />
           </div>
         ))}
@@ -165,41 +167,41 @@ function MovieListRate() {
           <label htmlFor="title" className="text-white">
             {isEnglish ? "Title:" : "Judul:"}
           </label>
-          <input type="text" id="title" value={title} onChange={handleTitleChange} className="w-1/3 border border-white bg-black rounded px-3 py-2 focus:outline-none" />
+          <input type="text" id="title" value={title} onChange={handleTitleChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-11/12" : "w-1/3"}`} />
         </div>
         <div className="flex flex-col">
           <label htmlFor="poster" className="text-white">
             URL Poster:
           </label>
-          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className="w-1/3 border border-white bg-black rounded px-3 py-2 focus:outline-none" />
+          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-11/12" : "w-1/3"}`} />
         </div>
         <div className="flex flex-col">
           <label htmlFor="rating" className="text-white">
             Rating:
           </label>
-          <input type="text" id="rating" value={rating} onChange={handleRatingChange} className="w-1/3 border border-white bg-black rounded px-3 py-2 focus:outline-none" />
+          <input type="text" id="rating" value={rating} onChange={handleRatingChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-11/12" : "w-1/3"}`} />
         </div>
         <div className="flex flex-col">
           <label htmlFor="description" className="text-white">
             {isEnglish ? "Your Thought:" : "Pikiranmu:"}
           </label>
-          <textarea id="description" value={description} onChange={handleDescriptionChange} className="w-1/3 border border-white bg-transparent rounded px-3 py-2 focus:outline-none" />
+          <textarea id="description" value={description} onChange={handleDescriptionChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-11/12" : "w-1/3"}`} />
         </div>
         <Button type="submit" label={isEditing ? (isEnglish ? "Update" : "Perbarui") : isEnglish ? "Add" : "Tambah"} />
       </form>
 
       {isPopupActive && selectedMovie && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/75">
-          <div className="bg-black p-4 rounded-lg w-1/2 p-4 shadow shadow-white/50">
-            <div className="flex">
-              <div className="shrink-0">
-                <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="rounded w-75 h-110" />
+        <div className={`fixed inset-0 flex items-center justify-center z-50 bg-black/75 ${isMobile ? "overflow-y-auto" : ""}`}>
+          <div className={`bg-black p-4 rounded-lg p-4 shadow shadow-white/50 ${isMobile ? "w-11/12" : "w-1/2"}`}>
+            <div className={isMobile ? "" : "flex"}>
+              <div className={`shrink-0 ${isMobile ? "flex justify-center items-center" : ""}`}>
+                <img src={selectedMovie.Poster} alt={selectedMovie.Title} className={`rounded transition ${isMobile ? "w-48 h-72 " : "w-75 h-110"}`} />
               </div>
-              <div className="ml-4 overflow-hidden">
-                <h2 className="text-3xl italic font-bold">{selectedMovie.Title}</h2>
-                <div className="my-4">
-                  <div className="rounded-full bg-black border brder-white p-4 w-10 h-10 -top-4 -right-4 flex items-center justify-center my-2">
-                    <p className="text-white text-lg">{selectedMovie.Rating}</p>
+              <div className="ml-4">
+                <h2 className={` italic font-bold truncate ${isMobile ? "mt-2 text-center text-xl truncate" : "text-3xl"}`}>{selectedMovie.Title}</h2>
+                <div className={`my-4 ${isMobile ? "flex justify-center items-center mt-2" : ""}`}>
+                  <div className={`rounded-full bg-black border border-white p-4 -top-4 -right-4 flex items-center justify-center my-2 ${isMobile ? "w-8 h-8" : "w-10 h-10"}`}>
+                    <p className={`text-white font-medium ${isMobile ? "text-sm" : "text-lg"}`}>{selectedMovie.Rating}</p>
                   </div>
                 </div>
                 <div>

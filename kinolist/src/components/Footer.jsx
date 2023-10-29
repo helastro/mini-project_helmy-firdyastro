@@ -2,9 +2,12 @@ import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../LanguageContext";
+import MediaQuery from "../MediaQuery";
 
 function Footer() {
   const { isEnglish } = useLanguage();
+  const isMobile = MediaQuery("(max-width: 768px)");
+
   return (
     <footer className="bg-black h-auto w-full">
       <div className="container mx-auto p-5 flex flex-col md:flex-row justify-around items-start">
@@ -68,7 +71,7 @@ function Footer() {
               </a>
             </li>
             <li className="text-white text-md pb-2 hover:font-semibold cursor-pointer" target="_blank">
-              <a href="https://github.com/helastro" className="text-white">
+              <a href="https://github.com/helastro" className="text-white" target="_blank">
                 Github
               </a>
             </li>
