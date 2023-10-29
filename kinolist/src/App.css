@@ -4,6 +4,14 @@ body {
   overflow-x: hidden;
 }
 
+.bg-desktop {
+  background-image: url("./assets/img/background_LandingPage.jpg");
+}
+
+.bg-mobile {
+  background-image: url("./assets/img/joiMobile.jpg");
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
