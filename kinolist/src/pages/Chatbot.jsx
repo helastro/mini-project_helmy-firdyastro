@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { useLanguage } from "../LanguageContext";
+import { AiOutlineArrowDown } from "react-icons/ai";
+import MediaQuery from "../MediaQuery";
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 
 const API_KEY = import.meta.env.VITE_OPENAI_KEY;
@@ -15,6 +17,7 @@ const systemMessage = {
 
 function Chatbot() {
   const { isEnglish } = useLanguage();
+  const isMobile = MediaQuery("(max-width: 768px)");
 
   const [messages, setMessages] = useState(() => {
     const savedMessages = localStorage.getItem("chatMessages");
@@ -100,19 +103,27 @@ function Chatbot() {
       <div className="flex justify-center items-center sticky top-16 z-10">
         <Button onClick={handleReset} label={isEnglish ? "Reset" : "Atur Ulang"} />
       </div>
-      <div className="relative h-full w-full bg-black">
-        <MainContainer className="border-none mx-40">
+      <div className="relative h-full w-full bg-black container mx-auto">
+        <div className={`fixed bottom-16 z-10 ${isMobile ? "right-4" : "right-20"}`}>
+          <a href="#messageInput">
+            <Button label={<AiOutlineArrowDown />} />
+          </a>
+        </div>
+
+        <MainContainer className="border-none">
           <ChatContainer>
             <MessageList
-              className=" scroll-smooth bg-black text-white bottom-12"
-              typingIndicator={isTyping ? <TypingIndicator className="bg-black rounded-full w-1/5 bg-black text-black" content={isEnglish ? "Hold on, let me cook..." : "Tunggu, biarkan aku berpikir..."} /> : null}
+              className=" scroll-smooth bg-black text-white"
+              typingIndicator={
+                isTyping ? <TypingIndicator className={`bg-black rounded-full  bg-black text-black ${isMobile ? "w-1/2" : "w-1/5"}`} content={isEnglish ? "Hold on, let me cook..." : "Tunggu, biarkan aku berpikir..."} /> : null
+              }
             >
               {messages.map((message, i) => {
                 console.log(message);
                 return <Message className="messageBubble" key={i} model={message} />;
               })}
             </MessageList>
-            <MessageInput className="message-input fixed bottom-0 border-none w-10/12" placeholder={isEnglish ? "Type..." : "Ketik..."} onSend={handleSend} />
+            <MessageInput id="messageInput" className="message-input" placeholder={isEnglish ? "Type..." : "Ketik..."} onSend={handleSend} />
           </ChatContainer>
         </MainContainer>
       </div>
