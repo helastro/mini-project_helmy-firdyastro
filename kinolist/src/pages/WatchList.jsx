@@ -19,7 +19,7 @@ function WatchList() {
   const isMobile = MediaQuery("(max-width: 768px)");
 
   const getMovieRequest = async (searchValue) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
+    const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
     const response = await fetch(url);
     const responseJson = await response.json();
 
