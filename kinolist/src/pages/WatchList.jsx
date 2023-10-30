@@ -34,7 +34,9 @@ function WatchList() {
 
   useEffect(() => {
     const movieWatchlist = JSON.parse(localStorage.getItem("react-kinolist-watchlist"));
-    setWatchlist(movieWatchlist);
+    if (movieWatchlist) {
+      setWatchlist(movieWatchlist);
+    }
   }, []);
 
   const saveToLocalStorage = (items) => {
