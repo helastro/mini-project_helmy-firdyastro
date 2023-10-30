@@ -10,14 +10,6 @@ function Navbar({ className }) {
   const { isEnglish, toggleLanguage } = useLanguage();
   let [open, setOpen] = useState(false);
 
-  const Links = [
-    { name: isEnglish ? "HOME" : "BERANDA", link: "/" },
-    { name: "WATCHLIST", link: "/Watchlist" },
-    { name: "RATE", link: "/Rate" },
-    { name: "CHATBOT", link: "/Chatbot" },
-    { name: isEnglish ? "HOW TO USE" : "CARA PENGGUNAAN", link: "/How-to-Use" },
-  ];
-
   return (
     <>
       <nav className="bg-gradient-to-b from-black text-white z-50 relative p-4 w-full sticky top-0 left-0 ">
@@ -26,13 +18,31 @@ function Navbar({ className }) {
             <img src={Logo} alt="Logo" className="h-8 w-8 cursor-pointer" />
           </Link>
           <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-12 bg-gradient-to-t from-black" : "top-[-490px] "}`}>
-            {Links.map((link, index) => (
-              <li key={index} className="md:ml-8 md:my-0 my-7 font-semibold">
-                <a href={link.link} className={`text-white hover:font-bold duration-500 ${open ? "bg-black py-2 px-4 rounded-full" : ""}`}>
-                  {link.name}
-                </a>
-              </li>
-            ))}
+            <li className="md:ml-8 md:my-0 my-7 font-semibold">
+              <Link to="/">
+                <p className={`text-white hover:font-bold duration-500 ${open ? "bg-black py-2 px-4 rounded-full" : ""}`}>{isEnglish ? "HOME" : "BERANDA"}</p>
+              </Link>
+            </li>
+            <li className="md:ml-8 md:my-0 my-7 font-semibold">
+              <Link to="/Watchlist">
+                <p className={`text-white hover:font-bold duration-500 ${open ? "bg-black py-2 px-4 rounded-full" : ""}`}>WATCHLIST</p>
+              </Link>
+            </li>
+            <li className="md:ml-8 md:my-0 my-7 font-semibold">
+              <Link to="/Rate">
+                <p className={`text-white hover:font-bold duration-500 ${open ? "bg-black py-2 px-4 rounded-full" : ""}`}>RATE</p>
+              </Link>
+            </li>
+            <li className="md:ml-8 md:my-0 my-7 font-semibold">
+              <Link to="/Chatbot">
+                <p className={`text-white hover:font-bold duration-500 ${open ? "bg-black py-2 px-4 rounded-full" : ""}`}>CHATBOT</p>
+              </Link>
+            </li>
+            <li className="md:ml-8 md:my-0 my-7 font-semibold">
+              <Link to="/How-to-Use">
+                <p className={`text-white hover:font-bold duration-500 ${open ? "bg-black py-2 px-4 rounded-full" : ""}`}>{isEnglish ? "HOW TO USE" : "CARA PENGGUNAAN"}</p>
+              </Link>
+            </li>
           </ul>
           <div className="flex items-center gap-6">
             <button className="h-8 w-8" onClick={toggleLanguage}>
