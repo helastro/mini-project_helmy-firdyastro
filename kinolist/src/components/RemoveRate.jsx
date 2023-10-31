@@ -1,5 +1,5 @@
 import React from "react";
-import { useLanguage } from "../LanguageContext";
+import { useLanguage } from "../config/LanguageContext";
 
 function RemoveRate() {
   const { isEnglish } = useLanguage();

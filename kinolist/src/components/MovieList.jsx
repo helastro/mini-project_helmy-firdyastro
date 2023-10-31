@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import MediaQuery from "../MediaQuery";
+import MediaQuery from "../config/MediaQuery";
 
 function MovieList(props) {
   const WatchlistComponent = props.watchlistComponent;

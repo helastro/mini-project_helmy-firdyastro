@@ -8,7 +8,7 @@ import SearchBar from "../components/SearchBar";
 import AddWatchlist from "../components/AddWatchlist";
 import RemoveWatchlist from "../components/RemoveWatchlist";
 import AddMovieManual from "../components/AddMovieManual";
-import MediaQuery from "../MediaQuery";
+import MediaQuery from "../config/MediaQuery";
 
 const API_KEY = import.meta.env.VITE_OMDB_KEY;
 

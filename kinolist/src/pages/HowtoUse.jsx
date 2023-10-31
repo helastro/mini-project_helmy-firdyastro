@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import cover from "../assets/img/cover.jpg";
-import { useLanguage } from "../LanguageContext";
+import { useLanguage } from "../config/LanguageContext";
 
 function HowtoUse() {
   const { isEnglish } = useLanguage();

@@ -4,8 +4,8 @@ import MovieListHeading from "../components/MovieListHeading";
 import Button from "./Button";
 import "../App.css";
 import RemoveWatchlist from "./RemoveWatchlist";
-import { useLanguage } from "../LanguageContext";
-import MediaQuery from "../MediaQuery";
+import { useLanguage } from "../config/LanguageContext";
+import MediaQuery from "../config/MediaQuery";
 
 function AddMovieManual() {
   const { isEnglish } = useLanguage();

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLanguage } from "../LanguageContext";
+import { useLanguage } from "../config/LanguageContext";
 
 function AddWatchlist() {
   const { isEnglish } = useLanguage();

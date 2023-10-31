@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MovieListRate from "../components/MovieListRate";
 import MovieListHeading from "../components/MovieListHeading";
-import MediaQuery from "../MediaQuery";
+import MediaQuery from "../config/MediaQuery";
 
 function Rate() {
   const isMobile = MediaQuery("(max-width: 768px)");

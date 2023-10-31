@@ -3,9 +3,9 @@ import "../App.css";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import { useLanguage } from "../LanguageContext";
+import { useLanguage } from "../config/LanguageContext";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import MediaQuery from "../MediaQuery";
+import MediaQuery from "../config/MediaQuery";
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 
 const API_KEY = import.meta.env.VITE_OPENAI_KEY;

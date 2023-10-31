@@ -4,8 +4,8 @@ import Footer from "../components/Footer";
 import Typewriter from "typewriter-effect";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../LanguageContext";
-import MediaQuery from "../MediaQuery";
+import { useLanguage } from "../config/LanguageContext";
+import MediaQuery from "../config/MediaQuery";
 
 function LandingPage() {
   const { isEnglish } = useLanguage();

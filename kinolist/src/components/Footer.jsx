@@ -1,8 +1,8 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../LanguageContext";
-import MediaQuery from "../MediaQuery";
+import { useLanguage } from "../config/LanguageContext";
+import MediaQuery from "../config/MediaQuery";
 
 function Footer() {
   const { isEnglish } = useLanguage();

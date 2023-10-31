@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../assets/img/logo_Kinolist_Round.png";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../LanguageContext";
+import { useLanguage } from "../config/LanguageContext";
 import FlagEng from "../assets/img/flag_Eng.png";
 import FlagInd from "../assets/img/flag_Ind.png";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";

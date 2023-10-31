@@ -3,8 +3,8 @@ import axios from "axios";
 import MovieListHeading from "../components/MovieListHeading";
 import Button from "./Button";
 import RemoveRate from "./RemoveRate";
-import { useLanguage } from "../LanguageContext";
-import MediaQuery from "../MediaQuery";
+import { useLanguage } from "../config/LanguageContext";
+import MediaQuery from "../config/MediaQuery";
 
 function MovieListRate() {
   const [title, setTitle] = useState("");
