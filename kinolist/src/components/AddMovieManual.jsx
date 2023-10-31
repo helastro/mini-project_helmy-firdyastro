@@ -122,13 +122,13 @@ function AddMovieManual() {
           <label htmlFor="title" className="text-white">
             {isEnglish ? "Title:" : "Judul:"}
           </label>
-          <input type="text" id="title" value={title} onChange={handleTitleChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-full" : "w-1/3"}`} />
+          <input type="text" id="title" value={title} onChange={handleTitleChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-1/3" : "w-full"}`} />
         </div>
         <div className="flex flex-col">
           <label htmlFor="poster" className="text-white">
             URL Poster:
           </label>
-          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-full" : "w-1/3"}`} />
+          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-1/3" : "w-full"}`} />
         </div>
         <Button type="submit" label={isEditing ? (isEnglish ? "Update" : "Perbarui") : isEnglish ? "Add" : "Tambah"} />
       </form>
