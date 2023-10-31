@@ -110,10 +110,10 @@ function Chatbot() {
           </a>
         </div>
 
-        <MainContainer className="border-none overflow-y-auto">
-          <ChatContainer>
+        <MainContainer className="border-none overflow-y-scroll touch-pan-y">
+          <ChatContainer className="overflow-y-scroll touch-pan-y">
             <MessageList
-              className=" scroll-smooth bg-black text-white"
+              className="scroll-smooth bg-black text-white overflow-y-scroll touch-pan-y"
               typingIndicator={
                 isTyping ? <TypingIndicator className={`bg-black rounded-full  bg-black text-black ${isMobile ? "w-8/12" : "w-1/5"}`} content={isEnglish ? "Hold on, let me cook..." : "Tunggu, biarkan aku berpikir..."} /> : null
               }
