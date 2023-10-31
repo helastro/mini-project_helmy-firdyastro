@@ -50,7 +50,7 @@ function MovieListRate() {
     }
 
     if (rating < 1 || rating > 10) {
-      alert(isEnglis ? "Rating must be between 1-10" : "Rating harus diantara 1-10");
+      alert(isEnglish ? "Rating must be between 1-10" : "Rating harus diantara 1-10");
       return;
     }
 
