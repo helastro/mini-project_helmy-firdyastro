@@ -97,7 +97,7 @@ function AddMovieManual() {
   };
 
   return (
-    <div>
+    <div className="overflow-x-hidden w-screen">
       <div className="scroll-container overflow-y-hidden overflow-x-auto flex flex-nowrap">
         {movieList.map((movie) => (
           <div key={movie.id} className="relative me-4 mb-4 flex flex-col items-center justify-center shrink-0">
@@ -122,13 +122,13 @@ function AddMovieManual() {
           <label htmlFor="title" className="text-white">
             {isEnglish ? "Title:" : "Judul:"}
           </label>
-          <input type="text" id="title" value={title} onChange={handleTitleChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-1/3" : "w-full"}`} />
+          <input type="text" id="title" value={title} onChange={handleTitleChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-11/12" : "w-1/3"}`} />
         </div>
         <div className="flex flex-col">
           <label htmlFor="poster" className="text-white">
             URL Poster:
           </label>
-          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-1/3" : "w-full"}`} />
+          <input type="text" id="poster" value={poster} onChange={handlePosterChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-11/12" : "w-1/3"}`} />
         </div>
         <Button type="submit" label={isEditing ? (isEnglish ? "Update" : "Perbarui") : isEnglish ? "Add" : "Tambah"} />
       </form>
