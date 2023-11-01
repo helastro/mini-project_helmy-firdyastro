@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
@@ -9,6 +9,8 @@ import MediaQuery from "../config/MediaQuery";
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
 
 const API_KEY = import.meta.env.VITE_OPENAI_KEY;
+
+const { isEnglish } = useLanguage();
 
 const systemMessage = {
   role: "system",
@@ -99,13 +101,6 @@ function Chatbot() {
     localStorage.setItem("chatMessages", JSON.stringify(messages));
   }, [messages]);
 
-  // const ref = useRef(null);
-
-  // const scroll = (scrollOffset) => {
-  //   if (ref.current) {
-  //     ref.current.scrollTop += scrollOffset;
-  //   }
-  // };
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
