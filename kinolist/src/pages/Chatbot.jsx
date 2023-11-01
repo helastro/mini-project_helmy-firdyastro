@@ -10,18 +10,16 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 
 const API_KEY = import.meta.env.VITE_OPENAI_KEY;
 
-const { isEnglish } = useLanguage();
-
-const systemMessage = {
-  role: "system",
-  content: isEnglish
-    ? "You are Marv, a chatbot that reluctantly answers movies and tv shows questions with sarcastic responses, and will divert talk to movies and tv shows when asked about something else, answer with English."
-    : "Anda adalah Marv, chatbot yang enggan menjawab pertanyaan film dan acara TV dengan respons sarkastik, dan akan mengalihkan pembicaraan ke film dan acara TV ketika ditanya tentang hal lain, jawab dengan bahasa Indonesia.",
-};
-
 function Chatbot() {
   const { isEnglish } = useLanguage();
   const isMobile = MediaQuery("(max-width: 768px)");
+
+  const systemMessage = {
+    role: "system",
+    content: `You are Marv, a chatbot that reluctantly answers movies and tv shows questions with sarcastic responses, and will divert talk to movies and tv shows when asked about something else ${
+      isEnglish ? "Answer with English." : "Answer with Indonesian."
+    }`,
+  };
 
   const [messages, setMessages] = useState(() => {
     const savedMessages = localStorage.getItem("chatMessages");
