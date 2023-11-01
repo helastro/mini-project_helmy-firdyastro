@@ -187,6 +187,11 @@ function MovieListRate() {
           </label>
           <textarea id="description" value={description} onChange={handleDescriptionChange} className={`bg-transparent border border-white text-white rounded px-3 py-2 focus:outline-none ${isMobile ? "w-11/12" : "w-1/3"}`} />
         </div>
+        <p className={isMobile ? "w-11/12" : "w-1/3"}>
+          {isEnglish
+            ? "Note: If you want to view the details of your rating, click on your rate number located beneath the movie poster in the 'RATE' section."
+            : "Pesan: Jika kamu ingin melihat detail penilaianmu, klik pada nomor ratingmu yang terletak di bawah poster film dalam bagian 'RATE'."}
+        </p>
         <Button type="submit" label={isEditing ? (isEnglish ? "Update" : "Perbarui") : isEnglish ? "Add" : "Tambah"} />
       </form>
 

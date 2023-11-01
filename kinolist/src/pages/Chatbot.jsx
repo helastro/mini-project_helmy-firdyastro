@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
@@ -97,23 +97,35 @@ function Chatbot() {
     localStorage.setItem("chatMessages", JSON.stringify(messages));
   }, [messages]);
 
+  // const ref = useRef(null);
+
+  // const scroll = (scrollOffset) => {
+  //   if (ref.current) {
+  //     ref.current.scrollTop += scrollOffset;
+  //   }
+  // };
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="chatbot bg-black text-white">
       <Navbar />
       <div className="flex justify-center items-center sticky top-16 z-10">
         <Button onClick={handleReset} label={isEnglish ? "Reset" : "Atur Ulang"} />
       </div>
-      <div className="relative h-full w-full bg-black container mx-auto">
+      <div className="chatScope relative h-full w-full bg-black container mx-auto">
         <div className={`fixed bottom-16 z-10 ${isMobile ? "right-4" : "right-20"}`}>
-          <a href="#messageInput">
-            <Button label={<AiOutlineArrowDown />} />
-          </a>
+          <Button label={<AiOutlineArrowDown />} onClick={scrollToBottom} />
         </div>
 
         <MainContainer className="border-none overflow-y-scroll touch-pan-y">
-          <ChatContainer className="overflow-y-scroll touch-pan-y">
+          <ChatContainer>
             <MessageList
-              className="scroll-smooth bg-black text-white overflow-y-scroll touch-pan-y"
+              className="scroll-smooth bg-black text-white"
               typingIndicator={
                 isTyping ? <TypingIndicator className={`bg-black rounded-full  bg-black text-black ${isMobile ? "w-8/12" : "w-1/5"}`} content={isEnglish ? "Hold on, let me cook..." : "Tunggu, biarkan aku berpikir..."} /> : null
               }
